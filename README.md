@@ -116,7 +116,6 @@ Tabela `auditoria` (quem, o quê, onde, quando, IP).
 ## 🧪 Postman (E2E)
 - Coleção: **`SGHSS.postman_collection.json`** (na raiz).
 - Ambiente: **`SGHSS.postman_enviroment.json`**  
-  > Dica: crie um ambiente com `{{base}} = http://localhost:5000` e variáveis de tokens/IDs (ou use o arquivo de ambiente que geramos na conversa).
 - Fluxo de testes da API em ordem:
   1. **Login ADMIN** → criar paciente/profissional → registrar usuários
   2. **Login PROF** → criar slot(Vaga Disponivel)
