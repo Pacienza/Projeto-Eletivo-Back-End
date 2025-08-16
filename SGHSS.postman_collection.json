@@ -1,0 +1,2344 @@
+{
+	"info": {
+		"_postman_id": "7644cfa2-6740-4c59-a390-be05b4b7ad29",
+		"name": "SGHSS",
+		"description": "Coleção de testes E2E do SGHSS (Auth, Agenda, Consultas, Teleconsulta, Prontuário, Prescrição, Internação, Relatórios, Histórico, Notificações).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28449209"
+	},
+	"item": [
+		{
+			"name": "01 - Auth/Admin",
+			"item": [
+				{
+					"name": "Login ADMIN",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j['access_token'];",
+									"if (v === undefined && j && j.data && j.data['access_token'] !== undefined) { v = j.data['access_token']; }",
+									"if (v !== undefined && v !== null) pm.environment.set('token_admin', v.toString());"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@local\",\n  \"senha\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/auth/login",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login ADMIN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"admin@local\",\n  \"senha\": \"123456\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/auth/login",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:41:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "456"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1NTM4MDQ2MiwianRpIjoiODU0Y2JmZDctN2FkZS00MGQyLWI5YzgtZWI5ZGRlZDJhMjI4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3NTUzODA0NjIsImNzcmYiOiI5YjcwM2NiOS02MGYxLTQ1N2UtYWQ4Ni1kOTc1ZmVkNTgyY2EiLCJleHAiOjE3NTUzODEzNjIsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AbG9jYWwiLCJwYWNpZW50ZV9pZCI6bnVsbCwicHJvZmlzc2lvbmFsX2lkIjpudWxsfQ.Y9bYPU5X8WtDODmjP4qxBj_P1d66fTAuPQ998FOwQAE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET /auth/me (ADMIN)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_admin}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/auth/me",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET /auth/me (ADMIN)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_admin}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/auth/me",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"auth",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:41:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "117"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"admin@local\",\n    \"identity\": \"1\",\n    \"paciente_id\": null,\n    \"profissional_id\": null,\n    \"role\": \"admin\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "02 - Cadastros (Paciente/Profissional)",
+			"item": [
+				{
+					"name": "Criar Paciente (ADMIN)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j.id || (j.data && j.data.id);",
+									"if (v !== undefined && v !== null) pm.environment.set('paciente_id', v.toString());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_admin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Marcos Castro\",\n  \"email\": \"marquin@gmail.com\",\n  \"data_nascimento\": \"15/04/1999\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/pacientes",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"pacientes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Criar Paciente (ADMIN)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_admin}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"Marcos Castro\",\n  \"email\": \"marquin@gmail.com\",\n  \"data_nascimento\": \"15/04/1999\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/pacientes",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"pacientes"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:43:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "108"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data_nascimento\": \"15/04/1999\",\n    \"email\": \"marquin@gmail.com\",\n    \"id\": 6,\n    \"nome\": \"Marcos Castro\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Criar Profissional (ADMIN)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j.id || (j.data && j.data.id);",
+									"if (v !== undefined && v !== null) pm.environment.set('profissional_id', v.toString());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_admin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Dr. Marcelo Rossi\",\n  \"email\": \"pemarcelo@igreja.com\",\n  \"especialidade\": \"Cardiologia\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/profissionais",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"profissionais"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Criar Profissional (ADMIN)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_admin}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nome\": \"Dr. Marcelo Rossi\",\n  \"email\": \"pemarcelo@igreja.com\",\n  \"especialidade\": \"Cardiologia\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/profissionais",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"profissionais"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:44:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "114"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"pemarcelo@igreja.com\",\n    \"especialidade\": \"Cardiologia\",\n    \"id\": 3,\n    \"nome\": \"Dr. Marcelo Rossi\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Registrar Usuário PROFISSIONAL (ADMIN)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_admin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"pemarcelo@igreja.com\",\n  \"senha\": \"123456\",\n  \"role\": \"profissional\",\n  \"profissional_id\": \"{{profissional_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/auth/register",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Registrar Usuário PROFISSIONAL (ADMIN)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_admin}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"pemarcelo@igreja.com\",\n  \"senha\": \"123456\",\n  \"role\": \"profissional\",\n  \"profissional_id\": \"{{profissional_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/auth/register",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:45:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "75"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"pemarcelo@igreja.com\",\n    \"id\": 4,\n    \"role\": \"profissional\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Registrar Usuário PACIENTE (ADMIN)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_admin}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"marquin@gmail.com\",\n  \"senha\": \"123456\",\n  \"role\": \"paciente\",\n  \"paciente_id\": \"{{paciente_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/auth/register",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Registrar Usuário PACIENTE (ADMIN)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_admin}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"marquin@gmail.com\",\n  \"senha\": \"123456\",\n  \"role\": \"paciente\",\n  \"paciente_id\": \"{{paciente_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/auth/register",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:45:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"email\": \"marquin@gmail.com\",\n    \"id\": 5,\n    \"role\": \"paciente\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "03 - Agenda & Consultas",
+			"item": [
+				{
+					"name": "Login PROFISSIONAL",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j['access_token'];",
+									"if (v === undefined && j && j.data && j.data['access_token'] !== undefined) { v = j.data['access_token']; }",
+									"if (v !== undefined && v !== null) pm.environment.set('token_prof', v.toString());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"pemarcelo@igreja.com\",\n  \"senha\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/auth/login",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login PROFISSIONAL",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"pemarcelo@igreja.com\",\n  \"senha\": \"123456\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/auth/login",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:46:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "473"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1NTM4MDc5NSwianRpIjoiMTU4ZjQwYTAtMzYxZS00NjlmLWE2MDMtODlhMjZhMGMxN2FhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjQiLCJuYmYiOjE3NTUzODA3OTUsImNzcmYiOiJjMWVlZTA0My1mMzJmLTQ0NTEtYTFkOS0wNmNiOWNhOThhYWIiLCJleHAiOjE3NTUzODE2OTUsInJvbGUiOiJwcm9maXNzaW9uYWwiLCJlbWFpbCI6InBlbWFyY2Vsb0BpZ3JlamEuY29tIiwicGFjaWVudGVfaWQiOm51bGwsInByb2Zpc3Npb25hbF9pZCI6M30.q-fIO_AeQtYdXlcjtoMF0yLlD8IOA9eq2ssCrc5FPWg\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Criar Slot de Agenda (PROF)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j.id || (j.data && j.data.id);",
+									"if (v !== undefined && v !== null) pm.environment.set('agenda_id', v.toString());"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_prof}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"profissional_id\": \"{{profissional_id}}\",\n  \"data\": \"25/08/2025\",\n  \"hora\": \"14:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/agendas",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"agendas"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Criar Slot de Agenda (PROF)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_prof}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"profissional_id\": \"{{profissional_id}}\",\n  \"data\": \"25/08/2025\",\n  \"hora\": \"14:00\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/agendas",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"agendas"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:46:52 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "103"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"25/08/2025\",\n    \"disponivel\": true,\n    \"hora\": \"14:00\",\n    \"id\": 4,\n    \"profissional_id\": 3\n}"
+						}
+					]
+				},
+				{
+					"name": "Login PACIENTE",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j['access_token'];",
+									"if (v === undefined && j && j.data && j.data['access_token'] !== undefined) { v = j.data['access_token']; }",
+									"if (v !== undefined && v !== null) pm.environment.set('token_pac', v.toString());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"marquin@gmail.com\",\n  \"senha\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/auth/login",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login PACIENTE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"marquin@gmail.com\",\n  \"senha\": \"123456\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/auth/login",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:47:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "464"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1NTM4MDg0NywianRpIjoiMmI3ZGRjYWMtMTI1Yy00NWQyLTkyYmYtNmJhMTkyYzY0MTkyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjUiLCJuYmYiOjE3NTUzODA4NDcsImNzcmYiOiJjYzJiY2U3OS1mNzBhLTRiNjEtYWI2MS04OGE1Mjk3NjQyZDMiLCJleHAiOjE3NTUzODE3NDcsInJvbGUiOiJwYWNpZW50ZSIsImVtYWlsIjoibWFycXVpbkBnbWFpbC5jb20iLCJwYWNpZW50ZV9pZCI6NiwicHJvZmlzc2lvbmFsX2lkIjpudWxsfQ.slwfNQGuIGg6ZtnGKnUdJvuBCosU_uP1S0MulUsh3ME\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Agendar Consulta (PAC)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j.id || (j.data && j.data.id);",
+									"if (v !== undefined && v !== null) pm.environment.set('consulta_id', v.toString());"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_pac}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"paciente_id\": \"{{paciente_id}}\",\n  \"profissional_id\": \"{{profissional_id}}\",\n  \"data\": \"25/08/2025\",\n  \"hora\": \"14:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/consultas",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"consultas"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Agendar Consulta (PAC)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_pac}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"paciente_id\": \"{{paciente_id}}\",\n  \"profissional_id\": \"{{profissional_id}}\",\n  \"data\": \"25/08/2025\",\n  \"hora\": \"14:00\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/consultas",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"consultas"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:47:46 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "125"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"25/08/2025\",\n    \"hora\": \"14:00\",\n    \"id\": 3,\n    \"paciente_id\": 6,\n    \"profissional_id\": 3,\n    \"status\": \"agendada\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancelar Consulta (PAC)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_pac}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/consultas/{{consulta_id}}/cancelar",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"consultas",
+								"{{consulta_id}}",
+								"cancelar"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cancelar Consulta (PAC)",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_pac}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/consultas/{{consulta_id}}/cancelar",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"consultas",
+										"{{consulta_id}}",
+										"cancelar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:48:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "126"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"25/08/2025\",\n    \"hora\": \"14:00\",\n    \"id\": 3,\n    \"paciente_id\": 6,\n    \"profissional_id\": 3,\n    \"status\": \"cancelada\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "04 - Teleconsulta + Anexos + Prontuário",
+			"item": [
+				{
+					"name": "Criar Teleconsulta (PROF)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j.id || (j.data && j.data.id);",
+									"if (v !== undefined && v !== null) pm.environment.set('tele_id', v.toString());"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_prof}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"paciente_id\": \"{{paciente_id}}\",\n  \"profissional_id\": \"{{profissional_id}}\",\n  \"data\": \"26/08/2025\",\n  \"hora\": \"09:30\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/teleconsultas",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"teleconsultas"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Criar Teleconsulta (PROF)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_prof}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"paciente_id\": \"{{paciente_id}}\",\n  \"profissional_id\": \"{{profissional_id}}\",\n  \"data\": \"26/08/2025\",\n  \"hora\": \"09:30\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/teleconsultas",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"teleconsultas"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:48:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"26/08/2025\",\n    \"hora\": \"09:30\",\n    \"id\": 1,\n    \"link\": \"https://tele.local/s/WLFxD0X8xYrn_cbt\",\n    \"paciente_id\": 6,\n    \"profissional_id\": 3,\n    \"status\": \"agendada\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Upload Anexo (PROF)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_prof}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "{{file_path}}"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base}}/teleconsultas/{{tele_id}}/anexos",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"teleconsultas",
+								"{{tele_id}}",
+								"anexos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Finalizar Teleconsulta (PROF) - cria Prontuário",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_prof}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/teleconsultas/{{tele_id}}/finalizar?resumo=Retorno&anotacoes=Sem%20queixas",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"teleconsultas",
+								"{{tele_id}}",
+								"finalizar"
+							],
+							"query": [
+								{
+									"key": "resumo",
+									"value": "Retorno"
+								},
+								{
+									"key": "anotacoes",
+									"value": "Sem%20queixas"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Finalizar Teleconsulta (PROF) - cria Prontuário",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_prof}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/teleconsultas/{{tele_id}}/finalizar?resumo=Retorno&anotacoes=Sem%20queixas",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"teleconsultas",
+										"{{tele_id}}",
+										"finalizar"
+									],
+									"query": [
+										{
+											"key": "resumo",
+											"value": "Retorno"
+										},
+										{
+											"key": "anotacoes",
+											"value": "Sem%20queixas"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:49:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "178"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"26/08/2025\",\n    \"hora\": \"09:30\",\n    \"id\": 1,\n    \"link\": \"https://tele.local/s/WLFxD0X8xYrn_cbt\",\n    \"paciente_id\": 6,\n    \"profissional_id\": 3,\n    \"status\": \"finalizada\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "05 - Prontuário & Prescrição",
+			"item": [
+				{
+					"name": "Listar Prontuários do Paciente (PROF)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_prof}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/prontuarios?paciente_id={{paciente_id}}",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"prontuarios"
+							],
+							"query": [
+								{
+									"key": "paciente_id",
+									"value": "{{paciente_id}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Listar Prontuários do Paciente (PROF)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_prof}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/prontuarios?paciente_id={{paciente_id}}",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"prontuarios"
+									],
+									"query": [
+										{
+											"key": "paciente_id",
+											"value": "{{paciente_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:49:33 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "155"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"anotacoes\": \"Sem queixas\",\n        \"data\": \"26/08/2025\",\n        \"id\": 1,\n        \"paciente_id\": 6,\n        \"profissional_id\": 3,\n        \"resumo\": \"Retorno\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Criar Prescrição (PROF)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j.id || (j.data && j.data.id);",
+									"if (v !== undefined && v !== null) pm.environment.set('prescricao_id', v.toString());"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_prof}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"paciente_id\": \"{{paciente_id}}\",\n  \"data\": \"26/08/2025\",\n  \"texto\": \"Dipirona 500mg 1cp 6/6h por 3 dias\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/prescricoes",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"prescricoes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Criar Prescrição (PROF)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_prof}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"paciente_id\": \"{{paciente_id}}\",\n  \"data\": \"26/08/2025\",\n  \"texto\": \"Dipirona 500mg 1cp 6/6h por 3 dias\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/prescricoes",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"prescricoes"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:49:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "131"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": \"26/08/2025\",\n    \"id\": 1,\n    \"paciente_id\": 6,\n    \"profissional_id\": 3,\n    \"texto\": \"Dipirona 500mg 1cp 6/6h por 3 dias\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "06 - Internação",
+			"item": [
+				{
+					"name": "Admitir Paciente (PROF)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var j = {}; try { j = pm.response.json(); } catch(e) {}",
+									"var v = j.id || (j.data && j.data.id);",
+									"if (v !== undefined && v !== null) pm.environment.set('internacao_id', v.toString());"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_prof}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"paciente_id\": \"{{paciente_id}}\",\n  \"data_entrada\": \"27/08/2025\",\n  \"leito\": \"A-203\",\n  \"diagnostico\": \"Observação clínica\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/internacoes",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"internacoes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Admitir Paciente (PROF)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_prof}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"paciente_id\": \"{{paciente_id}}\",\n  \"data_entrada\": \"27/08/2025\",\n  \"leito\": \"A-203\",\n  \"diagnostico\": \"Observação clínica\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/internacoes",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"internacoes"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:50:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "209"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data_alta\": null,\n    \"data_entrada\": \"27/08/2025\",\n    \"diagnostico\": \"Observação clínica\",\n    \"id\": 1,\n    \"leito\": \"A-203\",\n    \"paciente_id\": 6,\n    \"profissional_id\": 3,\n    \"status\": \"admitido\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Dar Alta (PROF)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_prof}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"data_alta\": \"29/08/2025\"\n}"
+						},
+						"url": {
+							"raw": "{{base}}/internacoes/{{internacao_id}}/alta",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"internacoes",
+								"{{internacao_id}}",
+								"alta"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Dar Alta (PROF)",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_prof}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"data_alta\": \"29/08/2025\"\n}"
+								},
+								"url": {
+									"raw": "{{base}}/internacoes/{{internacao_id}}/alta",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"internacoes",
+										"{{internacao_id}}",
+										"alta"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:50:18 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "213"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data_alta\": \"29/08/2025\",\n    \"data_entrada\": \"27/08/2025\",\n    \"diagnostico\": \"Observação clínica\",\n    \"id\": 1,\n    \"leito\": \"A-203\",\n    \"paciente_id\": 6,\n    \"profissional_id\": 3,\n    \"status\": \"alta\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "07 - Relatórios",
+			"item": [
+				{
+					"name": "Consultas por Período (ADMIN)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_admin}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/relatorios/consultas_por_periodo?inicio={{inicio_rel}}&fim={{fim_rel}}",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"relatorios",
+								"consultas_por_periodo"
+							],
+							"query": [
+								{
+									"key": "inicio",
+									"value": "{{inicio_rel}}"
+								},
+								{
+									"key": "fim",
+									"value": "{{fim_rel}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Consultas por Período (ADMIN)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_admin}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/relatorios/consultas_por_periodo?inicio={{inicio_rel}}&fim={{fim_rel}}",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"relatorios",
+										"consultas_por_periodo"
+									],
+									"query": [
+										{
+											"key": "inicio",
+											"value": "{{inicio_rel}}"
+										},
+										{
+											"key": "fim",
+											"value": "{{fim_rel}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:50:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"fim\": \"31/08/2025\",\n    \"inicio\": \"01/08/2025\",\n    \"total_agendadas\": 0,\n    \"total_canceladas\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Atendimentos por Profissional (ADMIN)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_admin}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/relatorios/atendimentos_por_profissional?inicio={{inicio_rel}}&fim={{fim_rel}}",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"relatorios",
+								"atendimentos_por_profissional"
+							],
+							"query": [
+								{
+									"key": "inicio",
+									"value": "{{inicio_rel}}"
+								},
+								{
+									"key": "fim",
+									"value": "{{fim_rel}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Atendimentos por Profissional (ADMIN)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_admin}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/relatorios/atendimentos_por_profissional?inicio={{inicio_rel}}&fim={{fim_rel}}",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"relatorios",
+										"atendimentos_por_profissional"
+									],
+									"query": [
+										{
+											"key": "inicio",
+											"value": "{{inicio_rel}}"
+										},
+										{
+											"key": "fim",
+											"value": "{{fim_rel}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:50:39 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "373"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"consultas\": 1,\n        \"nome\": \"Dr. Marcelo Rossi\",\n        \"profissional_id\": 3,\n        \"teleconsultas_finalizadas\": 1\n    },\n    {\n        \"consultas\": 0,\n        \"nome\": \"Dr. Mario Jorge\",\n        \"profissional_id\": 2,\n        \"teleconsultas_finalizadas\": 0\n    },\n    {\n        \"consultas\": 0,\n        \"nome\": \"Dra. Rayssa Pacienza\",\n        \"profissional_id\": 1,\n        \"teleconsultas_finalizadas\": 0\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Internações por Período (ADMIN)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_admin}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/relatorios/internacoes_por_periodo?inicio={{inicio_rel}}&fim={{fim_rel}}",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"relatorios",
+								"internacoes_por_periodo"
+							],
+							"query": [
+								{
+									"key": "inicio",
+									"value": "{{inicio_rel}}"
+								},
+								{
+									"key": "fim",
+									"value": "{{fim_rel}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Internações por Período (ADMIN)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_admin}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/relatorios/internacoes_por_periodo?inicio={{inicio_rel}}&fim={{fim_rel}}",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"relatorios",
+										"internacoes_por_periodo"
+									],
+									"query": [
+										{
+											"key": "inicio",
+											"value": "{{inicio_rel}}"
+										},
+										{
+											"key": "fim",
+											"value": "{{fim_rel}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:50:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"admitidos\": 1,\n    \"altas\": 1,\n    \"fim\": \"31/08/2025\",\n    \"inicio\": \"01/08/2025\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Tempo Médio de Internação (ADMIN)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_admin}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/relatorios/tempo_medio_internacao?inicio={{inicio_rel}}&fim={{fim_rel}}",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"relatorios",
+								"tempo_medio_internacao"
+							],
+							"query": [
+								{
+									"key": "inicio",
+									"value": "{{inicio_rel}}"
+								},
+								{
+									"key": "fim",
+									"value": "{{fim_rel}}"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Tempo Médio de Internação (ADMIN)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_admin}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/relatorios/tempo_medio_internacao?inicio={{inicio_rel}}&fim={{fim_rel}}",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"relatorios",
+										"tempo_medio_internacao"
+									],
+									"query": [
+										{
+											"key": "inicio",
+											"value": "{{inicio_rel}}"
+										},
+										{
+											"key": "fim",
+											"value": "{{fim_rel}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:50:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"fim\": \"31/08/2025\",\n    \"inicio\": \"01/08/2025\",\n    \"media_dias\": 2\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "08 - Histórico & Notificações",
+			"item": [
+				{
+					"name": "Meu Histórico (PAC)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_pac}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/me/historico",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"me",
+								"historico"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Meu Histórico (PAC)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_pac}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/me/historico",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"me",
+										"historico"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:51:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "667"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"consultas\": [\n        {\n            \"data\": \"25/08/2025\",\n            \"hora\": \"14:00\",\n            \"id\": 3,\n            \"profissional_id\": 3,\n            \"status\": \"cancelada\"\n        }\n    ],\n    \"prescricoes\": [\n        {\n            \"data\": \"26/08/2025\",\n            \"id\": 1,\n            \"profissional_id\": 3,\n            \"texto\": \"Dipirona 500mg 1cp 6/6h por 3 dias\"\n        }\n    ],\n    \"prontuarios\": [\n        {\n            \"data\": \"26/08/2025\",\n            \"id\": 1,\n            \"profissional_id\": 3,\n            \"resumo\": \"Retorno\"\n        }\n    ],\n    \"teleconsultas\": [\n        {\n            \"data\": \"26/08/2025\",\n            \"hora\": \"09:30\",\n            \"id\": 1,\n            \"link\": \"https://tele.local/s/WLFxD0X8xYrn_cbt\",\n            \"profissional_id\": 3,\n            \"status\": \"finalizada\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Minhas Notificações (PAC)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token_pac}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base}}/notificacoes",
+							"host": [
+								"{{base}}"
+							],
+							"path": [
+								"notificacoes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Minhas Notificações (PAC)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token_pac}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base}}/notificacoes",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"notificacoes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/3.1.3 Python/3.13.7"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Aug 2025 21:51:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "506"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"criado_em\": \"2025-08-16 21:48:12.972831\",\n        \"id\": 3,\n        \"lido\": false,\n        \"mensagem\": \"Sua consulta em 25/08/2025 às 14:00 foi cancelada.\",\n        \"tipo\": \"consulta_cancelada\",\n        \"titulo\": \"Consulta cancelada\",\n        \"usuario_id\": 5\n    },\n    {\n        \"criado_em\": \"2025-08-16 21:47:46.416694\",\n        \"id\": 1,\n        \"lido\": false,\n        \"mensagem\": \"Sua consulta em 25/08/2025 às 14:00 foi agendada.\",\n        \"tipo\": \"consulta_agendada\",\n        \"titulo\": \"Consulta agendada\",\n        \"usuario_id\": 5\n    }\n]"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.mypy_cache/
+.pytest_cache/
+
+# Virtualenv
+.venv/
+
+# instance e uploads locais
+instance/
+uploads/
+
+# Banco local / env
+sghss.db
+*.sqlite
+.env
+
+# IDE/OS
+.vscode/
+.idea/
+
